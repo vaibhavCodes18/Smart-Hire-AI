@@ -1,0 +1,9 @@
+pip install -r requirements.txt
+uvicorn app.main:app --reload
+
+jd:
+1)We are seeking enthusiastic Full-Stack Developer Freshers with knowledge of both Java backend development and the MERN stack. This hybrid role offers exposure to enterprise-level Java applications as well as modern web development using MongoDB, Express.js, React.js, and Node.js.
+
+2)We are looking for passionate MERN Stack Developer Freshers who are eager to build dynamic web applications. You will work on both frontend and backend development, gaining hands-on experience with modern JavaScript technologies.
+
+3)We are seeking enthusiastic Java Developer Freshers who are passionate about coding and eager to build scalable applications. You will work closely with senior developers to design, develop, and maintain Java-based solutions.
