@@ -109,18 +109,30 @@ graph TD
 
 **Use Case Diagram**
 ```mermaid
-usecaseDiagram
-    actor HR_Manager as "HR Manager"
-    HR_Manager --> (Input Job Description)
-    HR_Manager --> (Upload Resumes)
-    HR_Manager --> (Initiate Processing)
-    HR_Manager --> (View Ranked Results)
-    HR_Manager --> (Filter by Category)
-    HR_Manager --> (Download CSV Report)
+flowchart LR
+    HR([HR Manager])
     
-    (Initiate Processing) .> (Extract Text) : include
-    (Initiate Processing) .> (Calculate Similarity) : include
-    (Initiate Processing) .> (Classify Role) : include
+    JD([Input Job Description])
+    UR([Upload Resumes])
+    IP([Initiate Processing])
+    VR([View Ranked Results])
+    FC([Filter by Category])
+    DC([Download CSV Report])
+    
+    ET([Extract Text])
+    CS([Calculate Similarity])
+    CR([Classify Role])
+    
+    HR --> JD
+    HR --> UR
+    HR --> IP
+    HR --> VR
+    HR --> FC
+    HR --> DC
+    
+    IP -.->|include| ET
+    IP -.->|include| CS
+    IP -.->|include| CR
 ```
 
 **Sequence Diagram**
@@ -150,6 +162,27 @@ sequenceDiagram
     
     API-->>UI: Array of Results (Ranked)
     UI-->>U: Render Dynamic Dashboard
+```
+
+**Class Diagram**
+```mermaid
+classDiagram
+    class FastAPIApp {
+        +analyze_resumes(job_description, resumes)
+    }
+    class AIModel {
+        +SentenceTransformer embed_model
+        +DistilBERT classifier_model
+        +clean_text(text) String
+        +get_jd_embedding(jd_text) Vector
+        +process_resume(resume_text, jd_emb) Tuple
+    }
+    class PDFParser {
+        +extract_text_from_pdf(path) String
+    }
+    
+    FastAPIApp ..> AIModel : uses
+    FastAPIApp ..> PDFParser : uses
 ```
 
 ### Database Design (ER Diagram)
